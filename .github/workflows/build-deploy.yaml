@@ -26,8 +26,10 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/shoppingapi_usermanagement:${{ github.sha }}
+      - name: update config files in kBs
+        run: sed -i.bak 's/{{tag}}/word2/g' kBs/deploy.yaml && rm kBs/*.bak
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
-          args: get namespaces
+          args: apply -f ./kBs
