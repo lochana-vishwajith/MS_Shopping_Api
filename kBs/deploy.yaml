@@ -26,7 +26,7 @@ spec:
         app: user-api
     spec:
       containers:
-        - image: lochanavishwajith/shoppingapi_usermanagement:{{tag}}
+        - image: lochanavishwajith/user_api:latest
           imagePullPolicy: Always
           name: shoppingapi-usermanagement-c82nc
           resources: {}

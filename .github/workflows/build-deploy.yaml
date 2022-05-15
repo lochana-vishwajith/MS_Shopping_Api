@@ -25,7 +25,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/shoppingapi_usermanagement:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/user_api:${{ github.sha }}
       - name: update config files in kBs
         run: sed -i.bak 's/{{tag}}/${{ github.sha }}/g' kBs/deploy.yaml && rm kBs/*.bak
       - uses: actions-hub/kubectl@master
