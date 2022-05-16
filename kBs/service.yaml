@@ -12,5 +12,6 @@ spec:
       targetPort: 5000
   selector:
     app: user-api
-status:
-  loadBalancer: {}
+  type: LoadBalancer
+# status:
+#   loadBalancer: {}
