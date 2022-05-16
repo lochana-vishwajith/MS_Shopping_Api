@@ -3,7 +3,10 @@ name: Docker Image CI
 on:
   push:
     branches: [master]
-
+env:
+  GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
+  GKE_ZONE: us-central1-c
+  GKE_CLUSTER: shopping-user-api
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -41,9 +44,9 @@ jobs:
       - name: Deploy to GKE cluster
         uses: ameydev/gke-kubectl-action@master
         env:
-          PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+          PROJECT_ID: ${{  env.GKE_PROJECT }}
           APPLICATION_CREDENTIALS: ${{ secrets.USERAPI_KEY }}
-          CLUSTER_NAME: ${{ secrets.GKE_CLUSTER }}
-          ZONE_NAME: ${{ secrets.GKE_ZONE }}
+          CLUSTER_NAME: ${{ env.GKE_CLUSTER }}
+          ZONE_NAME: ${{ env.GKE_ZONE }}
         with:
           args: apply -f ./kBs
